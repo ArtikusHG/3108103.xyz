@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>endofsummer - отражение себя</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        font-family: Times, serif;
+      }
+      button {
+        color: white;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        background: #ff00e7;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100dvw;
+        height: 100dvh;
+
+        background-image: url("border.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%; /* Stretch to fill */
+
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .content {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100dvw;
+        height: 100dvh;
+
+        box-sizing: border-box;
+        padding: 2rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: white;
+        text-align: center;
+        flex-direction: column;
+
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      #pashalka {
+        color: white;
+        text-align: center;
+        width: 100%;
+        margin-top: 100px;
+        padding-bottom: 100px;
+        padding-inline: clamp(3rem, 10vw, 7rem);
+        font-size: clamp(10px, 5vw, 30px);
+        box-sizing: border-box;
+        overflow: vertical;
+      }
+      .marquee {
+        position: fixed;
+        top: 50px; /* ниже верхнего края */
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+
+        background: black;
+        color: white;
+
+        padding: 15px 0;
+
+        font-size: 15px;
+        font-weight: 900;
+
+        z-index: 10000;
+      }
+
+      .marquee span {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 20s linear infinite;
+      }
+
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      .footer {
+        position: fixed;
+        bottom: clamp(40px, 4vw, 90px);
+        left: 0;
+
+        width: 100%;
+        padding: 20px 0;
+
+        background: #ff00ff;
+        color: #00ff00;
+
+        text-align: center;
+
+        font-size: clamp(18px, 4vw, 28px);
+        font-weight: 1000;
+        font-family: Impact, fantasy;
+
+        text-shadow:
+          3px 3px 0 #000,
+          -3px -3px 0 #fff;
+
+        animation: uglyFooter 2s infinite alternate;
+      }
+      @keyframes uglyButton {
+        0% {
+          background: #ff00ff;
+          color: #00ff00;
+        }
+
+        25% {
+          background: #00ffff;
+          color: #ff0000;
+        }
+
+        50% {
+          background: #ffff00;
+          color: #0000ff;
+        }
+
+        75% {
+          background: #ff6600;
+          color: #00ffff;
+        }
+
+        100% {
+          background: #ff00ff;
+          color: #00ff00;
+        }
+      }
+
+      @keyframes uglyFooter {
+        0% {
+          background: #ff00ff;
+          color: #00ff00;
+          transform: skewX(0deg) rotate(0deg) scale(1);
+        }
+
+        25% {
+          background: #00ffff;
+          color: #ff0000;
+          transform: skewX(15deg) rotate(2deg) scale(1.05);
+        }
+
+        50% {
+          background: #ffff00;
+          color: #0000ff;
+          transform: skewX(-20deg) rotate(-3deg) scale(0.95);
+        }
+
+        75% {
+          background: #ff6600;
+          color: #00ffff;
+          transform: skewX(10deg) rotate(4deg) scale(1.1);
+        }
+
+        100% {
+          background: #ff00ff;
+          color: #00ff00;
+          transform: skewX(-15deg) rotate(-2deg) scale(1);
+        }
+      }
+
+      .dvd-button {
+        position: fixed;
+
+        font-family: Arial;
+        top: 100px;
+        left: 100px;
+
+        width: 120px;
+        height: 60px;
+
+        background: red;
+
+        font-size: 20px;
+        font-weight: 1000;
+
+        cursor: pointer;
+
+        z-index: 20000;
+
+        animation: fly 8s linear infinite alternate;
+      }
+
+      @keyframes fly {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+
+        25% {
+          transform: translate(70vw, 20vh) rotate(90deg);
+        }
+
+        50% {
+          transform: translate(20vw, 70vh) rotate(180deg);
+        }
+
+        75% {
+          transform: translate(80vw, 50vh) rotate(270deg);
+        }
+
+        100% {
+          transform: translate(0, 80vh) rotate(360deg);
+        }
+      }
+
+      .presavebtn {
+        width: 80%;
+        max-width: 500px;
+        height: 50px;
+        outline: none;
+        font-size: clamp(18px, 4vw, 28px);
+        font-family: "Pixelify Sans", sans-serif;
+        margin-top: 20px;
+      }
+
+      .hidden {
+        position: absolute;
+        opacity: 0;
+        transform: scale(0.5) rotate(-15deg);
+        pointer-events: none;
+      }
+
+      .show {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        pointer-events: auto;
+        transition: all 0.4s cubic-bezier(0.18, 1.4, 0.4, 1);
+      }
+
+      button {
+        transition: transform 0.2s ease;
+      }
+
+      button:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="https://ru.wikipedia.org/wiki/%D0%AD%D0%B9%D1%81%D0%BE%D0%BF%D1%82%D1%80%D0%BE%D1%84%D0%BE%D0%B1%D0%B8%D1%8F" target="_blank">
+      <div class="marquee">
+        <span>Эйсоптрофобия (от др.-греч. εἴσοπτρον «зеркало» + φόβος «страх») — специфическая фобия, заключающаяся в боязни зеркал и страхе увидеть собственное отражение в них. Может быть связана с дисморфофобией — озабоченностью своей некрасивостью, уродством или старостью.</span>
+      </div>
+    </a>
+
+    <div class="content">
+      <div id="hello">
+        <h1>привет, я пресейв!</h1>
+        <span>приятно познакомиться. нажми на кнопку, пожалуйста.... а не то мне будет очень грустно :( у меня ведь тоже есть чувства, хоть я и пресейв....</span>
+        <br />
+        <button type="button" class="presavebtn" id="makepresave" style="border: 4px solid red; animation: uglyButton 5s infinite">СДЕЛАТЬ ПРЕСЕЙВ</button>
+      </div>
+      <div id="presaves" class="hidden">
+        <a href="https://band.link/save-presave?type=yandex&bandlink_id=undefined&bandlink_hash=QZeyk&upc=5064024644126&redirectUrl=https://band.link/QZeyk"><button type="button" class="presavebtn" style="background-color: yellow; border: 4px solid red; color: red">Яндекс Музыка</button></a>
+        <a href="https://accounts.spotify.com/authorize?response_type=code&client_id=b4a316c64a59474d976ffc5dbf6e25e0&scope=user-follow-modify%20user-read-email%20user-library-modify&redirect_uri=https://band.link/spotify&state=undefined|https://band.link/QZeyk|5064024644126|QZeyk"><button type="button" class="presavebtn" style="background-color: green; border: 4px solid lime; color: lime">Spotify</button></a>
+        <a href="https://band.link/QZeyk"><button type="button" class="presavebtn" style="background-color: white; border: 4px solid deeppink; color: deeppink">Apple Music</button></a>
+        <a href="https://band.link/save-presave?type=vkmusic&bandlink_id=undefined&bandlink_hash=QZeyk&upc=5064024644126&redirectUrl=https://band.link/QZeyk"><button type="button" class="presavebtn" style="background-color: blue; border: 4px solid lightblue; color: lightblue">ВК Музыка</button></a>
+        <a href="https://band.link/save-presave?type=mts&bandlink_id=undefined&bandlink_hash=QZeyk&upc=5064024644126&redirectUrl=https%3A%2F%2Fband.link%2FQZeyk"><button type="button" class="presavebtn" style="background-color: purple; border: 4px solid deeppink; color: deeppink">КИОН Музыка</button></a>
+      </div>
+    </div>
+    <div id="pashalka" class="hidden">
+      <span>ну привет! с тобой опять говорит пресейв. да-да, не удивляйся, мы умеем разговаривать... <i><u>ТОЧНО ТАКЖЕ КАК И ЗЕРКАЛА.</u></i> но не переживай - мы добрые! ....если ты нажал(а) на кнопку, разумеется.<br /><br />ладно, если без шуток - спасибо, что ты с нами! если нашел(ла) эту страничку - срочно делай скриншот, чтобы потом до конца своих дней выёбываться тем, что ты знал(а) про 31/////08 и про 10///////3 самого начала. как пишут нормисы в ебучих инстаграм рилсах, "используйте этот рилс как бесплатный билет в гримёрку на мои будущие концерты!!!!". пиздец блять, хорошо что мы с вами не нормисы.<br /><br />моё время подходит к концу.... я всё-таки пресейв, и не могу долго общаться с людьми. напоследок скажу одно: <b>НИ ЗА ЧТО НЕ ЛОЖИСЬ СПАТЬ 7ГО АВГУСТА В НОЧЬ РЕЛИЗА, А КАК ТОЛЬКО Я ПРЕВРАЩУСЬ ИЗ ПРЕСЕЙВА В ССЫЛКУ НА ПРОСЛУШИВАНИЕ - ВОСПОЛЬЗУЙСЯ МНОЙ И ПОСЛУШАЙ РЕЛИЗ МИНИМУМ 3.108 РАЗ ПРЕЖДЕ ЧЕМ ЛОЖИТЬСЯ СПАТЬ, И ПОСТАВЬ НА НЕГО СЕРДЕЧКО, ИНАЧЕ...</b> узнаешь сам(а), но ничего хорошего не будет. впрочем, не воспринимай как угрозу, просто.... послушай релиз ;)<br /><br />ладно всё, пока! наслаждайся искусством. <br /><br /><h2>люблю тебя!<br />- твой пресейв.</h2></span>
+    </div>
+
+    <footer class="footer">
+      <span id="footer-text">ДОЛБИТ КАК WEB 2.0</span>
+    </footer>
+    <button class="dvd-button" onclick="pashalka()">бебебе не поймаешь</button>
+  </body>
+
+  <script>
+    const footerTexts = ["ДОЛБИТ КАК WEB 2.0", "разве ты не боишься зеркал?", "31/08навсегдасуки", "не бойся своего отражения;)))", "давай поговорим о написанных нами стихах :)", "proudly made on Linux!", "упресейвовтожеестьчувства;(", "103 MARSHRUTKA RECORDS", "103 МАРШРУТКА В ЭТОЙ СУКЕ", "31///////08", "если не сделаешь, я расстроюсь:("];
+
+    const footer = document.getElementById("footer-text");
+
+    function changeFooterText() {
+      let randomText;
+      do {
+        randomText = footerTexts[Math.floor(Math.random() * footerTexts.length)];
+      } while (randomText == footer.textContent);
+      footer.textContent = randomText;
+    }
+
+    changeFooterText(); // сразу при загрузке
+
+    setInterval(changeFooterText, 5000); // каждые 5 секунд
+
+    document.getElementById("makepresave").addEventListener("click", () => {
+      const panel = document.getElementById("presaves");
+      panel.classList.remove("hidden");
+      panel.classList.add("show");
+
+      document.getElementById("hello").style.display = "none";
+    });
+
+    function pashalka() {
+      if (document.getElementById("hello").style.display != "none") alert("ненененене сначала сделай пресейв ;)");
+      else {
+        const panel = document.getElementById("pashalka");
+        panel.classList.remove("hidden");
+        panel.classList.add("show");
+
+        document.getElementsByClassName("content")[0].style.display = "none";
+        document.getElementsByClassName("marquee")[0].style.display = "none";
+        document.getElementsByTagName("footer")[0].style.display = "none";
+        document.getElementsByClassName("dvd-button")[0].style.display = "none";
+        window.scrollTo(0, 0);
+      }
+    }
+  </script>
+</html>
