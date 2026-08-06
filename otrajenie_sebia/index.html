@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>endofsummer - отражение себя</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        font-family: Times, serif;
+      }
+      button {
+        color: white;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        background: #ff00e7;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+	width: 100vw;
+	height: 100vh;
+        width: 100dvw;
+        height: 100dvh;
+
+        background-image: url("border.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%; /* Stretch to fill */
+
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .content {
+	color: white;
+        text-align: center;
+        width: 100%;
+        margin-top: 120px;
+	padding-bottom: 100px;
+      }
+
+      .marquee {
+        position: fixed;
+        top: 50px; /* ниже верхнего края */
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+
+        background: black;
+        color: white;
+
+        padding: 15px 0;
+
+        font-size: 15px;
+        font-weight: 900;
+
+        z-index: 10000;
+      }
+
+      .marquee span {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 20s linear infinite;
+      }
+
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      .presavebtn {
+        width: 80%;
+        max-width: 500px;
+        height: 50px;
+        outline: none;
+        font-size: clamp(18px, 4vw, 28px);
+        font-family: "Pixelify Sans", sans-serif;
+        margin-top: 20px;
+      }
+
+      button {
+        transition: transform 0.2s ease;
+      }
+
+      button:hover {
+        transform: scale(1.1);
+      }
+      img { width: 80%; max-width: 500px;}
+    </style>
+  </head>
+  <body>
+    <a href="https://ru.wikipedia.org/wiki/%D0%AD%D0%B9%D1%81%D0%BE%D0%BF%D1%82%D1%80%D0%BE%D1%84%D0%BE%D0%B1%D0%B8%D1%8F" target="_blank">
+      <div class="marquee">
+        <span>Эйсоптрофобия (от др.-греч. εἴσοπτρον «зеркало» + φόβος «страх») — специфическая фобия, заключающаяся в боязни зеркал и страхе увидеть собственное отражение в них. Может быть связана с дисморфофобией — озабоченностью своей некрасивостью, уродством или старостью.</span>
+      </div>
+    </a>
+
+    <div class="content">
+      <div>
+      <img src="cover.png" />
+      <h1>endofsummer — отражение себя</h1>
+      <a href="https://music.yandex.ru/album/43219985"><button type="button" class="presavebtn" style="background-color: yellow; border: 4px solid red; color: red">Яндекс Музыка</button></a><br />
+      <a href="https://open.spotify.com/album/6h2UwJOAxcIxa6xfOs4wAB"><button type="button" class="presavebtn" style="background-color: green; border: 4px solid lime; color: lime">Spotify</button></a><br />
+      <a href="https://music.apple.com/ru/album/6796271569"><button type="button" class="presavebtn" style="background-color: white; border: 4px solid deeppink; color: deeppink">Apple Music</button></a><br />
+      <a href="https://music.vk.com/link/D0KuA"><button type="button" class="presavebtn" style="background-color: blue; border: 4px solid lightblue; color: lightblue">ВК Музыка</button></a><br />
+      <a href="https://music.mts.ru/album/43219985"><button type="button" class="presavebtn" style="background-color: purple; border: 4px solid deeppink; color: deeppink">КИОН Музыка</button></a><br />
+      </div>
+    </div>
+  </body>
+</html>
